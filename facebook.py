@@ -1,3 +1,31 @@
+#! /usr/bin/env python
+
+from __future__ import annotations
+# from dataclasses import dataclass
+
+
+# @dataclass
+class User:
+    def __init__(self, name: str) -> None:
+        self.name: str
+        self.friends: list[User] = []
+
+
+class Facebook:
+    def __init__(self) -> None:
+        self._users: dict[str, User] = {}
+
+    def pridej_uzivatel(self, name: str) -> None:
+        self._users[name] = User(name)
+
+    def pridej_znamost(self, name1: str, name2: str) -> None:
+        user1_uzel = self._users[name1]
+        user2_uzel = self._users[name2]
+
+        user1_uzel.friends.append(user2_uzel)
+        user2_uzel.friends.append(user1_uzel)
+
+
 # Vytvoření instance Facebooku
 fb = Facebook()
 
@@ -11,7 +39,7 @@ jmena = [
 # Vkládání známostí do Facebooku
 for jmeno in jmena:
     fb.pridej_uzivatel(jmeno)
-  
+
 # Hardkodované známosti
 znamosti = [
     ("Adam", "Beata"), ("Adam", "Cyril"), ("Beata", "Dana"),
