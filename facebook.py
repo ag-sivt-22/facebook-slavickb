@@ -10,7 +10,6 @@ myLogger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 
-# @dataclass
 class User:
     def __init__(self, name: str) -> None:
         self.name: str = name
@@ -35,9 +34,9 @@ class Facebook:
     def jak_daleko(self, name1: str, name2: str) -> Optional[int]:
         myLogger.debug(f"\n\nTask: find the distance between {name1} and {name2}\n")
         if name1 not in self._users:
-            raise KeyError(f"{name1} zatím uniká zuckerbergovým pařátům\nBuď osobu přidejte do systému, nebo hledejte jinou známost")
+            raise KeyError(f"{name1} zatím uniká zuckerbergovým pařátům - Buď osobu přidejte do systému, nebo hledejte jinou známost")
         elif name2 not in self._users:
-            raise KeyError(f"{name1} zatím uniká zuckerbergovým pařátům\nBuď osobu přidejte do systému, nebo hledejte jinou známost")
+            raise KeyError(f"{name2} zatím uniká zuckerbergovým pařátům - Buď osobu přidejte do systému, nebo hledejte jinou známost")
         else:
             candidates: Deque[tuple[User, int]] = deque()
             loop_check: list[User] = []
@@ -97,11 +96,9 @@ for clovek1, clovek2 in znamosti:
     fb.pridej_znamost(clovek1, clovek2)
 
 
-# myLogger.debug(f"Seznam uživatelů: {fb._users.__str__()}")
-# for clovek in fb._users:
-#     myLogger.debug(fb._users.get(clovek))
-
 jmeno1 = "Beata"
 jmeno2 = "Walter"
+jmeno3 = "Benedikt"
 
 myLogger.debug(f"{jmeno1} a {jmeno2} jsou od sebe daleko {fb.jak_daleko(jmeno1, jmeno2)}")
+myLogger.debug(f"{jmeno2} a {jmeno3} jsou od sebe daleko {fb.jak_daleko(jmeno2, jmeno3)}")
